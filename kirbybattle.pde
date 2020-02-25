@@ -63,7 +63,7 @@ void setup(){
   pantalla5 = new Pantalla5();
   
   //AUDIO
-  musica = new SoundFile(this, "theme.wav");
+  musica = new SoundFile(this, "theme.mp3");
   musica.play();
   
 
