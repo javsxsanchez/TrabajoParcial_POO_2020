@@ -19,5 +19,9 @@ class seleccion{
     ellipseMode(CORNER);
   rect(x,y,30,30);
   
+
+  
+  
+  
   }
 }

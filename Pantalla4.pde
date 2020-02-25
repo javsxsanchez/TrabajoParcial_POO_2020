@@ -4,7 +4,8 @@ class Pantalla4{
   int n2;
 int n;
   Pantalla4(){
-   n2 = 5; 
+   n2 = 10; 
+   n = 10;
   }
 
 
@@ -27,15 +28,21 @@ int n;
     textSize(70);
     fill(#FFFFFF);
     text("COMIENZA LA BATALLA", 160, 100);
-    
+    textSize(20);
+    text("PRESIONA LA LETRA 'w' minuscula", 60, 600);
+    text("PRESIONA LA LETRA 'o' minuscula", 660, 600);
+
     
     textSize(70);
     fill(255);
-    text(str(n), 190, 376);
+    text(str(n), 190, 200);
     
     textSize(70);
     fill(255);
-    text(str(n2), 390, 376);
+    text(str(n2), 690, 200);
+    
+    
+
     
     
    

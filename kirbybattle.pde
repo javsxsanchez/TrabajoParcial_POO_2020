@@ -1,15 +1,17 @@
-//import processing.sound.*;
-//SoundFile musica;
+import processing.sound.*;
+SoundFile musica;
 
 Pantalla1 pantalla1;
 Pantalla2 pantalla2;
 Pantalla3 pantalla3;
 Pantalla4 pantalla4;
+Pantalla5 pantalla5;
 
 kirbyRosa kirby1;
 kirbyRosa kirby2;
 kirbyRosa kirby3;
 kirbyRosa kirby4;
+Personaje personaje;
 
 seleccion[] boton = new seleccion[5];
 
@@ -24,11 +26,18 @@ int ataque1;
 int ataque2;
 int n = 5;
 int n1 = 5;
-
+int ataque;
+int ganador;
+int i=0;
+int vacio;
+boolean b;
 
 
 void setup(){
-  int a;
+  
+  
+
+  
   size(1080, 720);
   //Constructor de kirby es (color del cuerpo y manos, color de la sombra y mejillas
   //color de las piernas, color de sombra de las piernas, escalar)
@@ -37,10 +46,11 @@ void setup(){
   kirby4 = new kirbyRosa(102,80,24,1,0.7, 970,height/2);
   kirby2 = new kirbyRosa(#fce390,#f2cc74,#df473c,#b72b19, 0.7,370,height/2);
   kirby3 = new kirbyRosa(#4bc0fd,#09aafa,#0146d1,#105efc, 0.7,670,height/2);
-
   
   for( int i = 0; i < 5; i++){
   boton[i] = new seleccion((i+1)*210,200,#ffffff);
+    personaje = new Personaje(930,270);
+
   
   }
 
@@ -50,17 +60,17 @@ void setup(){
   pantalla2 = new Pantalla2();
   pantalla3 = new Pantalla3();
   pantalla4 = new Pantalla4();
+  pantalla5 = new Pantalla5();
   
   //AUDIO
-  //musica = new SoundFile(this, "theme.mp3");
-  //musica.play();
+  musica = new SoundFile(this, "theme.wav");
+  musica.play();
   
 
 }
   
 void draw(){
-  
-  
+
   if(p==0){
       pantalla1.display();
 
@@ -96,47 +106,20 @@ if(keyCode== 9){
       posX = mouseX;
       posY = mouseY;
       
+            personaje.display();
+
 
 }
 
       
     
 if(select == 2){
-  pantalla4.display();
-  for(int i = 0; i < 10; i++){
-    if(i%2 == 1){
-      
-            if(keyCode== 119){
-
-      ataque1 = int(random(0,4));
-            println("1 "+ ataque1);
-
-      n -= ataque1;
-      pantalla4.n=n;
-            }
-    
-
-    
-    }
-    
-    else{
-      
-      if(keyCode== 117){
-      ataque2 = int(random(0,2));
-      println("2 "+ ataque2);
-      n1 -= ataque2;
-      pantalla4.n2=n1;
-
-    }
-      
-      
-      
-      
-      
-      
+  pantalla4.display();    
       
     }
-  }
+    
+ 
+  
   
   
   
@@ -145,7 +128,8 @@ if(select == 2){
   //println(boton[i].s);
   //}
   
-    }
+
+
     
     
     //IF PERRONSOTE
@@ -155,12 +139,15 @@ if(select == 2){
     }
 
     if(boton[1].s==1){
+      kirby4.x = 500;
       kirby2.x = 700;
       kirby2.escalar = 1;
       kirby2.display();
     }
     
     if(boton[2].s==1){
+     kirby2.x = 700;
+      kirby3.x = 100;
       kirby3.escalar = 1;
       kirby3.display();
     }
@@ -169,21 +156,91 @@ if(select == 2){
       kirby4.escalar = 1;
       kirby4.display();
     }
+    
+    if(boton[4].s==1){
+      
+      personaje.display();
+      personaje.x = 300;
+      personaje.y = 200;
+      kirby1.x = 500;
+    }
 
+
+
+   if(i == 10){
+    pantalla5.display();
+    }
 
     }
     
     
     
+    void keyPressed() {
+      
+            if(key == 'o' && i%2==0){
+
+      ataque1 = int(random(1,4));
+
+      n = n - 2;
+      pantalla4.n-=int(random(0,4));
+      i++;
+
+        if (pantalla4.n < pantalla4.n2){
+          ganador = 1;
+          
+        }
+       
+        
+            }
+   
+      if(key == 'w' && i%2==1){
+      ataque2 = int(random(1,4));
+      n1 = n1 - 2;
+      pantalla4.n2-=int(random(0,4));
+      i++;
+      
+      
+        if (pantalla4.n2 > pantalla4.n){
+          ganador = 2;
+          
+        }
+
+
+    }
+    
+    if( i == 10){
+      if(key == 'w'){
+      vacio = 1;
+      ataque2= 0;
+     
+      }
+      
+      if(key == 'o'){
+      vacio = 0;
+      ataque1 = 0;
+      }
+      
+      
+    }
+    
+
     
     
     
+   
     
-  
+  }
+
+    
+    
+
+
+    
+
   
 
 
-void mouseClicked() {
+void mouseClicked(){
 if(posY >= 200 && posY <= 230){
         
         for(int i= 0; i<5; i++){
@@ -196,4 +253,19 @@ if(posY >= 200 && posY <= 230){
       }
   }
   
-}
+  
+  
+
+    
+  
+  
+  }
+
+
+
+  
+
+  
+
+   
+    
